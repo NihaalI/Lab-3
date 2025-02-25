@@ -29,3 +29,17 @@ class Character:
                 if self.pouch.num_uses == 0:
                     self.pouch = None  # Remove the item if it's fully used
                     
+class HealingPotion:
+    def __init__(self, name, num_uses, points_healed):
+        self.name = name
+        self.num_uses = num_uses
+        self.points_healed = points_healed
+
+    def __repr__(self):
+        return f"{self.name} (uses: {self.num_uses})"
+
+    def apply_effect(self, target):
+        if isinstance(target, Character):
+            target.health += self.points_healed
+            if target.health > target.max_health:
+                target.health = target.max_health  # Ensure health does not exceed max
